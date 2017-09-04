@@ -201,6 +201,8 @@ whoosh.release();
 
 `onError` {?function(error, props)} Optional callback function. If the file is successfully loaded, the first parameter `error` is `null`, and `props` contains an object with two properties: `duration` (in seconds) and `numberOfChannels` (`1` for mono and `2` for stereo sound), both of which can also be accessed from the `Sound` instance object. If an initialization error is encountered (e.g. file not found), `error` will be an object containing `code`, `description`, and the stack trace.
 
+**Note**: The name `onError` is a bit confusing, because when the file is loaded successfully, it will also be called. 
+
 `options` {?object} Platform-specific options:
 
 **Windows Only:** `enableSMTCIntegration` {?boolean}. Optional setting for windows to enable or disable SMTC integration (controlling your apps sounds or music via the keyboard, and the built-in media controls on Windows.) This is enabled by default. Set this to false when you don't want users to be able to control your sounds (e.g. sound effects.) See the [Windows.Media.SystemMediaTransportControls documentation](https://docs.microsoft.com/en-us/uwp/api/Windows.Media.SystemMediaTransportControls) for more information.
