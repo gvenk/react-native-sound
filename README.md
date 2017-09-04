@@ -315,7 +315,10 @@ Use this method to deactivate the AVAudioSession when playback is finished in or
 to regain access to the audio stack.
 
 ## Notes
-- To minimize playback delay, you may want to preload a sound file without calling `play()` (e.g. `var s = new Sound(...);`) during app initialization. This also helps avoid a race condition where `play()` may be called before loading of the sound is complete, which results in no sound but no error because loading is still being processed.
+- The `new Sound()` constructor is loading the sound file asynchronously. The constructor returns immediately. If the `play()` method is called too soon after initialization, it will fail. There are 3 options to prevent this from happening: 
+    1. Load the file during app initialization without calling `play()`. This also minimizes the playback delay.
+    2. Call the `play()` method from inside the `onError`-callback.
+    3. Set a timer before calling `play()`.
 - You can play multiple sound files at the same time. Under the hood, this module uses `AVAudioSessionCategoryAmbient` to mix sounds on iOS.
 - You may reuse a `Sound` instance for multiple playbacks.
 - On iOS, the module wraps `AVAudioPlayer` that supports aac, aiff, mp3, wav etc. The full list of supported formats can be found at https://developer.apple.com/library/content/documentation/MusicAudio/Conceptual/CoreAudioOverview/SupportedAudioFormatsMacOSX/SupportedAudioFormatsMacOSX.html
